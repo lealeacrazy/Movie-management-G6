@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    //"noImplicitAny": true,
+    "outDir": "dist",
+    "target": "ES2016"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
