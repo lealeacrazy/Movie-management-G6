@@ -1,14 +1,14 @@
-abstract class Person {
-    private Id: string;
-    private name: string;
+export abstract class Person {
+    protected id: string;
+    protected name: string;
 
-    constructor(Id: string, name: string) {
-        this.Id = Id;
+    constructor(id: string, name: string) {
+        this.id = id;
         this.name = name;
     }
 
-    public getId(): string {
-        return this.Id;
+    public getID(): string {
+        return this.id;
     }
 
     public getName(): string {

@@ -1,6 +1,8 @@
-import { Cinema } from "./Cinema";
+import Person from './Person';
+import Cinema from './Cinema';
+import Ticket from './Ticket';
 
-class Staff extends Person {
+export class Staff extends Person {
     private role: string;
     private cinema: Cinema;
 
@@ -10,12 +12,14 @@ class Staff extends Person {
         this.cinema = cinema;
     }
 
-    public manageShowtime(): void {
-        // Logic to manage showtimes
+    // User Story 5: Check QR code for ticket validity
+    public checkTicketQR(ticket: Ticket): boolean {
+        const showtime = ticket.getShowTime();
+        return showtime.getCinema() === this.cinema && ticket.getQRCode().startsWith("QR_");
     }
 
-    public assistCustomer(): void {
-        // Logic to assist customers
+    public manageShowtime(): void {
+        // Logic to manage showtimes
     }
 
     public getCinema(): Cinema {

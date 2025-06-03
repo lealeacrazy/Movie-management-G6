@@ -1,29 +1,50 @@
-export class Movie {
-    private movieId: string;
-    private title: string;
-    private description: string;
-    private genre: string;
-    private duration: number;
-    private releaseDate: Date;
+import Genre from '../enums/Genre';
+import Review from './Review';
 
-    constructor(movieId: string, title: string, description: string, genre: string, duration: number, releaseDate: Date) {
-        this.movieId = movieId;
+export class Movie {
+    private id: string;
+    private title: string;
+    private genre: Genre;
+    private duration: number;
+    private rating: number;
+    private description: string;
+    private reviews: Review[];
+
+    constructor(id: string, title: string, genre: Genre, duration: number, rating: number, description: string) {
+        this.id = id;
         this.title = title;
-        this.description = description;
         this.genre = genre;
         this.duration = duration;
-        this.releaseDate = releaseDate;
+        this.rating = rating;
+        this.description = description;
+        this.reviews = [];
     }
 
-    public addShowtime(showtime: Date): void {
-        // Logic to add a showtime for the movie
-        console.log(`Showtime ${showtime} added for movie ${this.title}`);
+    public addReview(review: Review): void {
+        this.reviews.push(review);
     }
 
-    public addReview(review: string): void {
-        // Logic to add a review for the movie
-        console.log(`Review added for movie ${this.title}: ${review}`);
+    public getReviews(): Review[] {
+        return this.reviews;
     }
 
-    
+    public getId(): string {
+        return this.id;
+    }
+
+    public getTitle(): string {
+        return this.title;
+    }
+
+    public getGenre(): Genre {
+        return this.genre;
+    }
+
+    public getDuration(): number {
+        return this.duration;
+    }
+
+    public getRating(): number {
+        return this.rating;
+    }
 }
