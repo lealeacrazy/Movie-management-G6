@@ -1,3 +1,4 @@
+import { Movie } from "./Movie";
 import { User } from "./User"
 
 export class Review {
@@ -10,7 +11,7 @@ export class Review {
     public reviewDate: Date
   ) {}
 
-  editReview(rating: number, comment: string): void {
+  getReview(rating: number, comment: string): void {
     this.rating = rating;
     this.comment = comment;
   }

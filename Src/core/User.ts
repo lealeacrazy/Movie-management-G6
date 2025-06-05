@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Person from './Person';
 import UserRole from '../enums/UserRole';
 import Movie from './Movie';
@@ -11,6 +12,23 @@ export class User extends Person {
     private password: string;
     private role: UserRole;
     private bookings: Booking[] = [];
+=======
+import { Person } from "./Person";
+import { Booking } from "../service/Booking";
+import { Review } from "./Review";
+
+export class User extends Person {
+  constructor(
+    id: string,
+    name: string,
+    public email: string,
+    public password: string,
+    public bookings: Booking[] = [],
+    public reviews: Review[] = []
+  ) {
+    super(id, name); 
+  }
+>>>>>>> 3fbd9bf1ffe272335c6485c159ecf3761e86d878
 
     constructor(id: string, name: string, email: string, password: string, role: UserRole = UserRole.USER) {
         super(id, name);
@@ -23,6 +41,7 @@ export class User extends Person {
         return this.email === email && this.password === password;
     }
 
+<<<<<<< HEAD
     public updateProfile(name: string, email: string): void {
         this.name = name;
         this.email = email;
@@ -77,3 +96,13 @@ export class User extends Person {
         return this.role;
     }
 }
+=======
+  addBooking(booking: Booking): void {
+    this.bookings.push(booking);
+  }
+
+  getBookings(): Booking[] {
+    return this.bookings;
+  }
+}
+>>>>>>> 3fbd9bf1ffe272335c6485c159ecf3761e86d878
