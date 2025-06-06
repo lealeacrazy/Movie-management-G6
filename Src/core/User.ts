@@ -8,7 +8,8 @@ export class User extends Person {
     public email: string,
     public password: string,
     public bookings: Booking[] = [],
-    public reviews: Review[] = []
+    public reviews: Review[] = [],
+    public walletBalance: number = 0
   ) {
     super(userId, name);
   }
