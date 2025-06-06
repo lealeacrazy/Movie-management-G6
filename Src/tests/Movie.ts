@@ -7,8 +7,8 @@ import { Seat } from "../core/Seat";
 
 
 
-// ------------------- Configuration -------------------
-const simpleDate = "06-05-2025"; // <-- Change this date
+
+const simpleDate = "06-05-2025"; 
 
 function parseDate(dateStr: string): Date {
   const [day, month, year] = dateStr.split("-").map(Number);
@@ -23,39 +23,38 @@ function formatDate(date: Date): string {
 }
 
 const showtimeDate = parseDate(simpleDate);
-// -----------------------------------------------------
 
-// Step 1: Create movie manager
+// Create movie manager
 const movieManager = new MovieManager();
 
-// Step 2: Create a movie
+// Create a movie
 const movie = new Movie(
   "1",
   "Hariporter and the Philosopher's Stone",
-  Genre.ROMANCE, // Genre
-  148, // duration
-  "PG-13", // rating
+  Genre.ROMANCE, 
+  148, 
+  "Star 4", 
   "A young wizard discovers his magical heritage on his 11th birthday when Hagrid escorts him to magic school."
 );
 
-// Step 3: Add movie
+// Add movie
 movieManager.addMovie(movie);
 
-// Step 4: Create cinema
+// Create cinema
 const cinema = new Cinema("01", "Theater A1", "Eon2", 5);
 
-// Step 5: Create seats
+// Create seats
 const seats: Seat[] = [
   new Seat("s1", "A", 1, "Standard", "Available"),
   new Seat("s2", "A", 2, "Standard", "Booked"),
   new Seat("s3", "A", 3, "Standard", "Reserved"),
 ];
 
-// Step 6: Create showtime
+// Create showtime
 const showtime = new Showtime("2:00:48s", movie, cinema, showtimeDate, seats);
 movie.addShowTime(showtime);
 
-// Step 7: Display showtimes
+// Display showtimes
 const showtimes = movieManager.getAllShowtimes();
 
 if (showtimes.length === 0) {
