@@ -99,7 +99,7 @@ reserveSeats(showtime, [seat1, seat2, seat3]);
 // Create Booking
 const selectedSeats = [seat1, seat2];
 const total = calculateTotal(selectedSeats);
-const booking = new Booking("B001", user, showtime, selectedSeats, new Date(), total);
+const booking = new Booking("B001", user, showtime, selectedSeats, new Date());
 
 // Confirm Booking
 confirmBooking(booking);
