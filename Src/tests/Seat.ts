@@ -7,7 +7,6 @@ import { Movie } from "../core/Movie";
 import { Cinema } from "../core/Cinema";
 import { Genre } from "../service/Genre";
 
-// Utility functions
 function getAvailableSeats(seats: Seat[]): Seat[] {
   return seats.filter(seat => seat.status === "Available");
 }
@@ -29,10 +28,10 @@ function reserveSeats(showtime: Showtime, seatsToReserve: Seat[]): void {
   }
 
   if (reserved.length > 0) {
-    console.log("✅ Reserved:", reserved.join(", "));
+    console.log("Reserved:", reserved.join(", "));
   }
   if (failed.length > 0) {
-    console.log("❌ Already reserved or booked:", failed.join(", "));
+    console.log("Already reserved or booked:", failed.join(", "));
   }
 }
 
@@ -42,7 +41,7 @@ function confirmBooking(booking: Booking): void {
       seat.status = "Booked";
     }
   });
-  console.log("✅ Seats booked:", booking.seats.map(seat => `${seat.row}${seat.number}`).join(", "));
+  console.log("Seats booked:", booking.seats.map(seat => `${seat.row}${seat.number}`).join(", "));
 }
 
 function cancelBooking(booking: Booking): void {
@@ -69,8 +68,18 @@ function generateTicket(user: User, showtime: Showtime, seats: Seat[]): Ticket {
     showtime,
     seats,
     calculateTotal(seats),
-    new Date()
+    new Date(),
+    `QR-${Math.random().toString(36).substring(2, 10)}`,
+    `REF-${Math.floor(100000 + Math.random() * 900000)}`
   );
+}
+
+function scanTicket(ticket: Ticket, inputQr: string): void {
+  if (ticket.validateQRCode(inputQr)) {
+    console.log(`Ticket ${ticket.ticketId} validated. Welcome, ${ticket.user.name}!`);
+  } else {
+    console.log("Invalid QR Code. Access denied.");
+  }
 }
 
 // Create a User
@@ -107,14 +116,18 @@ confirmBooking(booking);
 // Generate Ticket
 const ticket = generateTicket(user, showtime, selectedSeats);
 
-// Display Ticket Info
+// Display Ticket 
 console.log("\n🎟️ Ticket Info:");
 ticket.displayTicket();
 
-// Cancel the booking (for demo)
+// QR Code Scan
+scanTicket(ticket, ticket.qrCode);          
+scanTicket(ticket, "QR-incorrectcode");      
+
+// Cancel the booking 
 cancelBooking(booking);
 
-// Final Seat Statuses
+
 console.log("\n🪑 Final Seat Statuses:");
 showtime.seats.forEach(seat => {
   console.log(`${seat.row}${seat.number}: ${seat.status}`);
