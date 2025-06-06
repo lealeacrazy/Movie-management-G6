@@ -116,7 +116,7 @@ confirmBooking(booking);
 // Generate Ticket
 const ticket = generateTicket(user, showtime, selectedSeats);
 
-// Display Ticket Info
+// Display Ticket 
 console.log("\n🎟️ Ticket Info:");
 ticket.displayTicket();
 
@@ -127,7 +127,7 @@ scanTicket(ticket, "QR-incorrectcode");
 // Cancel the booking 
 cancelBooking(booking);
 
-// Final Seat Statuses
+
 console.log("\n🪑 Final Seat Statuses:");
 showtime.seats.forEach(seat => {
   console.log(`${seat.row}${seat.number}: ${seat.status}`);
