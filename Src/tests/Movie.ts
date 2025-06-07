@@ -1,6 +1,6 @@
 import { Movie } from "../core/Movie";
 import { MovieManager } from "../service/MovieManager";
-import { Genre } from "../service/Genre";
+import { Genre } from "../enum/Genre";
 import { Showtime } from "../service/ShowTime";
 import { Cinema } from "../core/Cinema";
 import { Seat } from "../core/Seat";
@@ -76,5 +76,3 @@ if (showtimes.length === 0) {
   console.log("Showtimes:\n", formattedShowtimes);
   
 }
-
-

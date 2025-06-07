@@ -1,5 +1,4 @@
 import { Booking } from "../service/Booking";
-//User
 export class User {
   public bookings: Booking[] = [];
   walletBalance: any;
@@ -8,29 +7,12 @@ export class User {
     public userId: string,
     public name: string,
     public email: string,
-    public password: string,
-    public bookings: Booking[] = [],
-    public reviews: Review[] = [],
-    public walletBalance: number = 0
-  ) {
-    super(userId, name);
+    public password: string
+  ) {}
+
+  addBooking(booking: Booking): void {
+    this.bookings.push(booking);
   }
-
-    constructor(id: string, name: string, email: string, password: string, role: UserRole = UserRole.USER) {
-        super(id, name);
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-
-    public login(email: string, password: string): boolean {
-        return this.email === email && this.password === password;
-    }
-
-    public updateProfile(name: string, email: string): void {
-        this.name = name;
-        this.email = email;
-    }
 
   getBookingHistory(currentTime: Date): {
     past: Booking[],

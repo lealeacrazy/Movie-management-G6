@@ -1,4 +1,3 @@
-// Booking.ts
 import { Ticket } from "../core/Ticket";
 import { User } from "../core/User";
 import { Showtime } from "./ShowTime";
@@ -11,7 +10,7 @@ export class Booking {
 
   constructor(
     public bookingId: string,
-    public user: User,                // ✅ Must be public so Payment.ts can access walletBalance
+    public user: User,                
     public showtime: Showtime,
     public seats: Seat[],
     public bookingDate: Date

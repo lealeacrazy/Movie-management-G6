@@ -5,7 +5,7 @@ import { Seat } from "../core/Seat";
 import { Ticket } from "../core/Ticket";
 import { Movie } from "../core/Movie";
 import { Cinema } from "../core/Cinema";
-import { Genre } from "../service/Genre";
+import { Genre } from "../enum/Genre";
 
 function getAvailableSeats(seats: Seat[]): Seat[] {
   return seats.filter(seat => seat.status === "Available");
@@ -86,7 +86,7 @@ function scanTicket(ticket: Ticket, inputQr: string): void {
 const user = new User("U001", "Alice", "alice@mail.com", "pass123");
 
 // Create a Movie
-const movie = new Movie("M001", "Inception", Genre.SCIFI, 148, "Star-4", "Mind-bending thriller.");
+const movie = new Movie("M001", "Inception", Genre.SCI_FI, 148, "Star-4", "Mind-bending thriller.");
 
 // Create a Cinema
 const cinema = new Cinema("C01", "Theater A", "Downtown", 10);
@@ -117,7 +117,7 @@ confirmBooking(booking);
 const ticket = generateTicket(user, showtime, selectedSeats);
 
 // Display Ticket 
-console.log("\n🎟️ Ticket Info:");
+console.log("\n🎟 Ticket Info:");
 ticket.displayTicket();
 
 // QR Code Scan
