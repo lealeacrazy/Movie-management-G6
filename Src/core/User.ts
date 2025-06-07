@@ -13,7 +13,7 @@ export class User {
     public reviews: Review[] = [],
     public walletBalance: number = 0
   ) {
-    super(id, name); 
+    super(userId, name);
   }
 
     constructor(id: string, name: string, email: string, password: string, role: UserRole = UserRole.USER) {

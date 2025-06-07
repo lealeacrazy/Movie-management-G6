@@ -1,15 +1,37 @@
-import { Showtime } from "../service/ShowTime";
+import Seat from './Seat';
+import Zone from '../enum/Zone';
 
 export class Cinema {
-  constructor(
-    public cinemaId: string,
-    public name: string,
-    public location: string,
-    public screens: number,
-    public showtimes: Showtime[] = []
-  ) {}
+    private id: string;
+    private name: string;
+    private location: string;
+    private seats: Seat[];
+    private zones: Zone[];
 
-  getShowtimes(): Showtime[] {
-    return this.showtimes;
-  }
+    constructor(id: string, name: string, location: string, zones: Zone[]) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.seats = [];
+        this.zones = zones;
+        zones.forEach(zone => {
+            zone.getSeats().forEach(row => row.forEach(seat => this.seats.push(seat)));
+        });
+    }
+
+    public getSeats(): Seat[] {
+        return this.seats;
+    }
+
+    public getZones(): Zone[] {
+        return this.zones;
+    }
+
+    public getId(): string {
+        return this.id;
+    }
+
+    public getName(): string {
+        return this.name;
+    }
 }
