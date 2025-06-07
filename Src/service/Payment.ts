@@ -1,15 +1,14 @@
-// Payment.ts
 import { Booking } from "../service/Booking";
 import { Ticket } from "../core/Ticket";
 
 export class Payment {
-  private static TAX_RATE = 0.1; // 10% tax
-  private static BOOKING_FEE = 2.5; // Fixed booking fee in dollars
+  private TAX_RATE = 0.1; 
+  private BOOKING_FEE = 2.5; 
 
-  /**
-   * Calculates the total price of the booking including tax and fees.
-   */
-  static calculateTotal(booking: Booking): number {
+  constructor() {}
+
+
+  calculateTotal(booking: Booking): number {
     const seatPrice = booking.seats.reduce((total, seat) => {
       const basePrice = seat.zone === "VIP" ? 15 : 10;
       return total + basePrice;
@@ -20,10 +19,8 @@ export class Payment {
     return parseFloat(total.toFixed(2));
   }
 
-  /**
-   * Processes a payment using the user's wallet balance.
-   */
-  static processPayment(booking: Booking): boolean {
+  
+  processPayment(booking: Booking): boolean {
     const total = this.calculateTotal(booking);
 
     if (!booking.user || typeof booking.user.walletBalance !== "number") {
@@ -40,10 +37,8 @@ export class Payment {
     return false;
   }
 
-  /**
-   * Generates a digital ticket only if the booking is paid.
-   */
-  static generateTicket(booking: Booking): Ticket {
+  
+  generateTicket(booking: Booking): Ticket {
     if (!booking.isPaid) {
       throw new Error("Cannot generate ticket before payment.");
     }
@@ -56,10 +51,12 @@ export class Payment {
       booking.showtime,
       booking.seats,
       booking.totalPrice,
-      new Date()
+      new Date(),
+      `QR-${Math.random().toString(36).substring(2, 10)}`,
+      `REF-${Math.floor(100000 + Math.random() * 900000)}`
     );
 
-    booking.setTicket(ticket); // Optional: store ticket inside booking
+    booking.setTicket(ticket);
     return ticket;
   }
 }

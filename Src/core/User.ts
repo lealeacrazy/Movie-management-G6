@@ -1,11 +1,12 @@
-import { Person } from "./Person";
 import { Booking } from "../service/Booking";
-import { Review } from "./Review";
 
-export class User extends Person {
+export class User {
+  public bookings: Booking[] = [];
+  walletBalance: any;
+
   constructor(
-    id: string,
-    name: string,
+    public userId: string,
+    public name: string,
     public email: string,
     public password: string,
     public bookings: Booking[] = [],
