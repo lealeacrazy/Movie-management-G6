@@ -1,5 +1,5 @@
 import { Booking } from "../service/Booking";
-
+//User
 export class User {
   public bookings: Booking[] = [];
   walletBalance: any;
