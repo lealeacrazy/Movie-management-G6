@@ -32,52 +32,28 @@ export class User {
         this.email = email;
     }
 
-    // User Story 1: Browse and filter movies by genre
-    public getMoviesByGenre(genre: Genre, theatre: TheatreManagement): Movie[] {
-        return theatre.getMoviesByGenre(genre);
+  getBookingHistory(currentTime: Date): {
+    past: Booking[],
+    current: Booking[],
+    upcoming: Booking[]
+  } {
+    const past: Booking[] = [];
+    const current: Booking[] = [];
+    const upcoming: Booking[] = [];
+
+    for (const booking of this.bookings) {
+      const start = booking.showtime.dateTime;
+      const end = new Date(start.getTime() + booking.showtime.movie.duration * 60000);
+
+      if (currentTime < start) {
+        upcoming.push(booking);
+      } else if (currentTime >= start && currentTime <= end) {
+        current.push(booking);
+      } else {
+        past.push(booking);
+      }
     }
 
-    // User Story 1: Browse showtimes for a movie on a specific date
-    public getShowtimes(movie: Movie, date: Date, theatre: TheatreManagement): Showtime[] {
-        return theatre.getShowtimes(movie, date);
-    }
-
-    // User Story 4: View upcoming and past bookings
-    public getBookings(): Booking[] {
-        const now = new Date();
-        return this.bookings;
-    }
-
-    public getUpcomingBookings(): Booking[] {
-        const now = new Date();
-        return this.bookings.filter(booking => booking.getShowTime().getDateTime() >= now);
-    }
-
-    public getPastBookings(): Booking[] {
-        const now = new Date();
-        return this.bookings.filter(booking => booking.getShowTime().getDateTime() < now);
-    }
-
-    // User Story 6: Rate and review movie experience
-    public addReview(movie: Movie, rating: number, comment: string): void {
-        const review = new Review(`R${Math.random().toString(36).substring(2, 9)}`, this, movie, rating, comment);
-        movie.addReview(review);
-    }
-
-    // Helper to add booking
-    public addBooking(booking: Booking): void {
-        this.bookings.push(booking);
-    }
-
-    public getEmail(): string {
-        return this.email;
-    }
-
-    public setEmail(email: string): void {
-        this.email = email;
-    }
-
-    public getRole(): UserRole {
-        return this.role;
-    }
+    return { past, current, upcoming };
+  }
 }
